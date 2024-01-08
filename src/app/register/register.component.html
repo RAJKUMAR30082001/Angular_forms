@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Register Here..</h1>
+    <div class="alert"></div>
+    <!-- register.component.html -->
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" />
+      <div *ngIf="registerForm.get('name')!.hasError('required') && registerForm.get('name')!.touched">
+        Name is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username" />
+      <div *ngIf="registerForm.get('username')!.hasError('required') && registerForm.get('username')!.touched">
+        Username is required.
+      </div>
+      <div *ngIf="registerForm.get('username')!.hasError('minlength') &&registerForm.get('username')!.touched">
+        Username must be at least 5 characters long.
+      </div>
+      <div *ngIf="registerForm.get('username')!.hasError('pattern') && registerForm.get('username')!.touched">
+        Username must have atleast one lower or uppercase letter
+      </div>
+    </div>
+  
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="registerForm.get('password')!.hasError('required') && registerForm.get('password')!.touched">
+        Password is required.
+      </div>
+      <div *ngIf="registerForm.get('password')!.hasError('minlength') && registerForm.get('password')!.touched">
+        Password must be at least 6 characters long.
+      </div>
+    </div>
+  
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" id="email" formControlName="email" />
+      <div *ngIf="registerForm.get('email')!.hasError('required') && registerForm.get('email')!.touched">
+        Email is required.
+      </div>
+      <div *ngIf="registerForm.get('email')!.hasError('email') && registerForm.get('email')!.touched">
+        Enter a valid email address.
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+  <button [routerLink]="['/home']">click to login</button>
+</body>
+</html>
